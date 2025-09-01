@@ -182,4 +182,5 @@ The application uses the Sakila sample database, which includes:
 
 ---
 
+
 **Made with ❤️ using Streamlit and AI**

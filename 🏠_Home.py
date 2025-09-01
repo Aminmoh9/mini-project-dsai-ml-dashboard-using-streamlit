@@ -7,7 +7,8 @@ from sqlalchemy import text
 st.set_page_config(
     page_title="Sakila DVD Rental Analysis",
     page_icon="🎬",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="collapsed"  # Collapsed for faster main page rendering
 )
 
 # Navigation
@@ -16,13 +17,18 @@ render_sidebar_info()
 # Main content
 st.title("🎬 Sakila DVD Rental Store Analysis")
 
-# Quick connection check 
+# Single connection check, result reused
 try:
     engine = create_db_engine()
+    db_connected = False
     if engine:
         with engine.connect() as conn:
             conn.execute(text("SELECT 1"))
+        db_connected = True
         st.success("✅ Successfully connected to Sakila database")
+    else:
+        st.error("❌ Database connection failed.")
+        st.info("Please check your database configuration in the .env file")
 except Exception as e:
     st.error(f"❌ Database connection failed: {e}")
     st.info("Please check your database configuration in the .env file")
@@ -53,9 +59,12 @@ with col1:
     - **🤖 AI-Powered**: Movie recommendations using Sentence Transformers
     """)
     
-    # Show some quick stats
+    # Show some quick stats (cached)
+    @st.cache_data
+    def cached_movie_db():
+        return get_movie_database()
     try:
-        movie_db = get_movie_database()
+        movie_db = cached_movie_db()
         if not movie_db.empty:
             st.metric("Movies in Database", len(movie_db))
     except:
@@ -78,7 +87,7 @@ with col2:
 st.markdown("---")
 st.subheader("📀 Our Movie Collection")
 
-# Add multiple images in a grid
+# Add multiple images in a grid (consider compressing images for faster load)
 col1, col2, col3 = st.columns(3)
 
 with col1:
@@ -112,7 +121,6 @@ with st.expander("⚙️ Tech Stack & Requirements"):
     - Python packages listed in requirements.txt
     - Internet connection for cloud database access
     """)
-    
     # Add a technical image
     st.image("images/cloud_tech.jpg",
              caption="Cloud Database Technology",
