@@ -1,51 +1,185 @@
-![logo_ironhack_blue 7](https://user-images.githubusercontent.com/23629340/40541063-a07a0a8a-601a-11e8-91b5-2f13e4e6b441.png)
+# 🎬 Sakila DVD Rental Analysis & Movie Prediction System
 
-# Mini Project | Data - Create a Machine Learning dashboard using Streamlit
+A comprehensive Streamlit web application that provides exploratory data analysis (EDA) of the Sakila DVD rental database and AI-powered movie recommendations using advanced natural language processing.
 
-## Mini Project Overview
+## 🌟 Features
 
-This is a 2-day hands-on mini project where you need to create a streamlit application for the Sakila database. This application must contain three pages:
+### 🏠 Home Page
+- **Interactive Dashboard**: Overview of the Sakila DVD rental system
+- **Database Connection Status**: Real-time monitoring of Supabase PostgreSQL connection
+- **Visual Gallery**: Movie collection showcase with representative images
+- **Tech Stack Information**: Detailed breakdown of technologies used
 
-- Home
-- EDA
-- Prediction
+### 📊 EDA Analysis
+- **Daily Rentals Visualization**: Interactive line plot showing rental patterns by store in 2005
+- **Store Filter Options**: Toggle between viewing All stores, Store 1 only, or Store 2 only
+- **Revenue Analysis**: Bar chart comparing total benefit (revenue) between stores
+- **Top Movies Rankings**: Data tables showing the top 5 most rented movies per store
+- **Summary Statistics**: Key metrics including total rentals, revenue, and unique movies
 
-## Instructions
+### 🔮 Movie Recommendations
+- **AI-Powered Search**: Enter movie descriptions to find similar films
+- **Semantic Matching**: Uses Sentence Transformers for intelligent content-based recommendations
+- **Top 3 Results**: Returns the most similar movies with titles, ratings, and similarity scores
+- **Movie Browser**: Paginated view of all available movies (10 per page)
+- **Visual Indicators**: Color-coded similarity scores and rating badges
 
-### Dataset
+## 🛠️ Technology Stack
 
-In this project, you will be using the [Sakila](https://dev.mysql.com/doc/sakila/en/) database of movie rentals. You can follow the steps listed here to get the data locally: [Sakila sample database - installation](https://dev.mysql.com/doc/sakila/en/sakila-installation.html). You can work with two sql query files - `sakila-schema.sql` (creates the schema) + `sakila-data.sql` which inserts the data.
+- **Frontend**: Streamlit (Python web framework)
+- **Database**: Supabase (PostgreSQL cloud hosting)
+- **Data Processing**: Pandas, NumPy
+- **Visualizations**: Plotly (interactive charts)
+- **AI/ML**: Sentence Transformers, Scikit-learn
+- **Database ORM**: SQLAlchemy
+- **Deployment**: Cloud-ready architecture
 
-The ERD is pictured below - not all tables are shown, but many of the key fields you will be using are visible:
+## 🚀 Getting Started
 
-<br>
+### Prerequisites
+- Python 3.8 or higher
+- Internet connection (for cloud database access)
+- Git (for cloning the repository)
 
-![DB schema](https://education-team-2020.s3-eu-west-1.amazonaws.com/data-analytics/database-sakila-schema.png)
+### Installation
 
-<br><br>
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Aminmoh9/saklia_movies_prediction.git
+   cd saklia_movies_prediction
+   ```
 
-## Requirements
+2. **Create a virtual environment**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
 
-### Home page
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Must contain a title and an image of your choice.
+4. **Configure Streamlit Secrets**
+   Create a `.streamlit/secrets.toml` file in your project root:
+   ```toml
+   SUPABASE_CONNECTION_STRING = "your_supabase_postgresql_connection_string"
+   ```
 
-### EDA page
+5. **Run the application**
+   ```bash
+   streamlit run 🏠_Home.py
+   ```
 
-Must contain the following plots:
+6. **Access the app**
+   Open your browser and navigate to `http://localhost:8501`
 
-- A line plot of daily rentals by each store in 2005
-- A bar plot with the total benefit by each store
-- A dataframe with the top five most rented movies by each store in 2005. Hint: use `st.dataframe(df)`
+## 📁 Project Structure
 
-### Prediction page
+```
+saklia_movies_prediction/
+│
+├── 🏠_Home.py                 # Main application entry point
+├── Backend.py                 # Database connections and AI functions
+├── UI_components.py           # Reusable UI components
+├── requirements.txt           # Python dependencies
+├── README.md                 # Project documentation
+│
+├── .streamlit/
+│   └── secrets.toml          # Configuration secrets
+│
+├── pages/
+│   ├── 1📊_EDA.py           # Exploratory Data Analysis page
+│   └── 2📈_Predictions.py   # Movie recommendation page
+│
+└── images/                   # Static images for the application
+    ├── action_movies.jpg
+    ├── classic_films.jpg
+    ├── drama_romance.jpg
+    ├── dvd_store.jpg
+    └── cloud_tech.jpg
+```
 
-<!-- Must contain a `st.text_area()` that will allow the user to input a movie description and get a prediction from the movie rating prediction model created yesterday.
-It also must contain an `st.button("Get Your Prediction")` button. -->
+## 🎯 Key Functionalities
 
-Must contain a `st.text_area()` that will allow the user to input a movie description and get the top 3 most similar movies by description. Display the matches’ title and rating. It also must contain an `st.button(“Get Your Prediction”)` button. HINT: use the embedding model (Sentence Transformer) and the cosine similarity function.
+### Data Analysis Features
+- **Time Series Analysis**: Daily rental patterns across different stores
+- **Comparative Analysis**: Store performance metrics and revenue comparison
+- **Ranking Systems**: Most popular movies by rental frequency
+- **Interactive Filtering**: Dynamic store selection for focused analysis
+
+### AI Recommendation Engine
+- **Semantic Search**: Uses `all-MiniLM-L6-v2` model for text embeddings
+- **Cosine Similarity**: Calculates content similarity between user queries and movie descriptions
+- **Real-time Processing**: Instant recommendations based on natural language input
+- **Similarity Scoring**: Visual indicators showing match confidence levels
+
+## 📊 Database Schema
+
+The application uses the Sakila sample database, which includes:
+- **Films**: 1000 movies with descriptions, ratings, and categories
+- **Rentals**: Complete rental transaction history
+- **Stores**: Two rental locations with full operational data
+- **Customers**: Customer information and rental patterns
+- **Payments**: Financial transaction records
+
+## 🔧 Configuration
+
+### Environment Variables
+- `SUPABASE_CONNECTION_STRING`: PostgreSQL connection string for Supabase
+
+### Customization Options
+- **Store Filters**: Modify store selection options in EDA page
+- **Recommendation Count**: Adjust the number of similar movies returned
+- **Visual Themes**: Customize color schemes and layouts
+- **Pagination**: Change movies per page in the browser
+
+## 🚦 Usage Examples
+
+### Finding Movie Recommendations
+1. Navigate to the "Predictions" page
+2. Enter a movie description (e.g., "A space adventure with aliens and spaceships")
+3. Click "Get Your Prediction"
+4. Review the top 3 similar movies with ratings and similarity scores
+
+### Analyzing Store Performance
+1. Go to the "EDA Analysis" page
+2. Use the store filter to compare individual store performance
+3. Examine the revenue bar chart for financial insights
+4. Review top movie rankings by store
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 
-## Submission
+## 👨‍💻 Author
 
-Upon completion, add your deliverables to git. Then commit git and push your branch to the remote.
+**Amin Mohammadi**
+- GitHub: [@Aminmoh9](https://github.com/Aminmoh9)
+- Project: [Sakila Movies Prediction](https://github.com/Aminmoh9/mini-project-dsai-ml-dashboard-using-streamlit)
+
+## 🙏 Acknowledgments
+
+- **MySQL**: For providing the Sakila sample database
+- **Supabase**: For cloud PostgreSQL hosting
+- **Streamlit**: For the amazing web application framework
+- **Hugging Face**: For the Sentence Transformers library
+- **Plotly**: For interactive visualization capabilities
+
+## 📈 Future Enhancements
+
+- [ ] Add more sophisticated recommendation algorithms
+- [ ] Implement user rating prediction
+- [ ] Add customer behavior analysis
+- [ ] Include seasonal trend analysis
+- [ ] Expand to multiple languages support
+- [ ] Add export functionality for reports
+
+---
+
+**Made with ❤️ using Streamlit and AI**
