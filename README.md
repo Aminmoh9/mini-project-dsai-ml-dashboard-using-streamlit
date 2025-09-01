@@ -182,5 +182,8 @@ The application uses the Sakila sample database, which includes:
 
 ---
 
+[Open the Streamlit App](https://aminmoh9-mini-project-dsai-ml-dashboard-using-stre--home-8rpnve.streamlit.app/)
+
+Experience the Sakila DVD Rental Analysis & Movie Prediction System live in your browser.
 
 **Made with ❤️ using Streamlit and AI**
